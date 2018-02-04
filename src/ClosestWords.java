@@ -24,8 +24,6 @@ public class ClosestWords {
         int matrix[][] = new int[w1len + 1][w2len + 1];
 
         for (int i = 0; i <= w1len; i++) {
-
-
             for (int j = 0; j <= w2len; j++) {
                 if (i == 0)
                     matrix[i][j] = j;
@@ -38,9 +36,6 @@ public class ClosestWords {
                     matrix[i][j] = 1 + getmin(matrix[i][j - 1],
                             matrix[i - 1][j],
                             matrix[i - 1][j - 1]);
-
-
-
             }
         }
 

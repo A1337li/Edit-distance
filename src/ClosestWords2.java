@@ -9,55 +9,52 @@ public class ClosestWords2 {
 
     int closestDistance = -1;
 
-    int[][] oldMatrix;
-    String oldWord;
+    int[][] oldMatrix = new int[30][30];
+    String oldWord = " ";
 
     public int compareWords(String word1, String word2) {
         int x = 0;
-        while (word1.charAt(x) == word2.charAt(x)){
-            x++;
+        int y = Math.min(word1.length(), word2.length());
+        while (x < y && y > 0){
+            if (word1.charAt(x) == word2.charAt(x)) {
+                x++;
+            }
+            else{
+                break;
+            }
 
         }
         return x;
     }
 
-    static int getmin(int x, int y, int z)
-    {
-        if (x <= y && x <= z) return x;
-        if (y <= x && y <= z) return y;
-        else return z;
+    int getmin(int x, int y, int z) {
+        return Math.min(x, Math.min(y,z));
     }
 
     int[][] partDist(String w1, String w2, int w1len, int w2len) {
         int compareVal = compareWords(oldWord,w2);
 
-        int matrix[][] = new int[w1len + 1][w2len + 1];
-        for (int i = 0; i <= w1len; i++){
-            for (int j=0; j < compareVal; j++){
-                matrix[i][j] = oldMatrix[i][j];
-            }
-        }
         for (int i = 0; i <= w1len; i++) {
 
             for (int j = compareVal; j <= w2len; j++) {
                 if (i == 0)
-                    matrix[i][j] = j;
+                    oldMatrix[i][j] = j;
 
                 else if (j == 0)
-                    matrix[i][j] = i;
+                    oldMatrix[i][j] = i;
                 else if (w1.charAt(i - 1) == w2.charAt(j - 1))
-                    matrix[i][j] = matrix[i - 1][j - 1];
+                    oldMatrix[i][j] = oldMatrix[i - 1][j - 1];
                 else
-                    matrix[i][j] = 1 + getmin(matrix[i][j - 1],
-                            matrix[i - 1][j],
-                            matrix[i - 1][j - 1]);
+                    oldMatrix[i][j] = 1 + getmin(oldMatrix[i][j - 1],
+                            oldMatrix[i - 1][j],
+                            oldMatrix[i - 1][j - 1]);
 
 
 
             }
         }
-        oldMatrix = matrix;
-        return matrix;
+
+        return oldMatrix;
     }
 
 
