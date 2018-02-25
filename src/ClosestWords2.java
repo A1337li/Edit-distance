@@ -23,7 +23,7 @@ public class ClosestWords2 {
                     oldMatrix[i][j] = oldMatrix[i - 1][j - 1];
                 }
                 else {
-                    oldMatrix[i][j] = 1 + getmin(oldMatrix[i][j - 1],
+                    oldMatrix[i][j] = 1 + getMin(oldMatrix[i][j - 1],
                             oldMatrix[i - 1][j],
                             oldMatrix[i - 1][j - 1]);
                 }
@@ -74,7 +74,7 @@ public class ClosestWords2 {
         return x;
     }
 
-    int getmin(int x, int y, int z) {
+    int getMin(int x, int y, int z) {
         return Math.min(x, Math.min(y,z));
     }
 
